@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code à Copier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            font-size: 2em;
+        }
+        pre {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            padding: 10px;
+            overflow: auto;
+            white-space: pre-wrap; /* Pour que le texte soit mis en forme et puisse s'enrouler */
+        }
+        code {
+            color: #d14;
+        }
+        button {
+            display: block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Code à Copier</h1>
+    <p>Voici le script que vous pouvez copier et utiliser :</p>
+    <pre><code>
+
+const links = Array.from(document.querySelectorAll('a')).map(a =&gt; a.href);
+const htmlContent = '&lt;!DOCTYPE html&gt;&lt;html lang="fr"&gt;&lt;head&gt;&lt;meta charset="UTF-8"&gt;&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;&lt;title&gt;Liens&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;' + window.location.hostname + '&lt;/h1&gt;' + links.map(link =&gt; '&lt;p&gt;&lt;a href="' + link + '"&gt;' + link + '&lt;/a&gt;&lt;/p&gt;').join('') + '&lt;/body&gt;&lt;/html&gt;';
+const blob = new Blob([htmlContent], { type: 'text/html' });
+const a = document.createElement('a');
+a.href = URL.createObjectURL(blob);
+a.download = 'liens.html';
+a.click();
+URL.revokeObjectURL(a.href);
+
+    </code></pre>
+    <button onclick="copyCode()">Copier le Code</button>
+
+    <script>
+        function copyCode() {
+            const code = document.querySelector('pre code');
+            const range = document.createRange();
+            range.selectNode(code);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand('copy');
+            alert('Code copié dans le presse-papiers!');
+        }
+    </script>
+</body>
+</html>
